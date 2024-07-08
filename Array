@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Struct to represent a single non-zero element in the sparse matrix
+struct Element {
+    int row;
+    int col;
+    int value;
+};
+
+// Class to represent a sparse matrix using an array of elements
+class SparseMatrix {
+private:
+    vector<Element> elements;
+    int rows, cols;
+public:
+    SparseMatrix(int rows, int cols) : rows(rows), cols(cols) {}
+
+    void addElement(int row, int col, int value) {
+        if (row >= rows || col >= cols) {
+            cout << "Invalid position!" << endl;
+            return;
+        }
+        if (value != 0) {
+            elements.push_back({row, col, value});
+        }
+    }
+
+    void display() {
+        for (auto& e : elements) {
+            cout << "Row: " << e.row << ", Col: " << e.col << ", Value: " << e.value << endl;
+        }
+    }
+
+    // Additional methods for operations can be added here
+};
+
+int main() {
+    SparseMatrix sm(5, 5);
+    sm.addElement(0, 1, 5);
+    sm.addElement(2, 3, 8);
+    sm.addElement(4, 0, 6);
+    sm.display();
+
+    return 0;
+}
